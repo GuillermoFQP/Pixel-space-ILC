@@ -76,7 +76,7 @@ deallocate(map_out, freqmaps, cov, cov_inv, w)
 
 contains
 
-! Compute the covariance matrix of "nvar" variables with "nobs" observations stacked in a matrix "A"
+! Compute the covariance matrix of "nvar" variables with "nobs" observations stacked in a matrix A
 subroutine cov_mtx(nvar, nobs, A, C)
 	integer, intent(in)     :: nvar, nobs
 	real(DP), intent(inout) :: A(nobs,nvar)
@@ -106,7 +106,7 @@ subroutine cov_mtx(nvar, nobs, A, C)
 	deallocate(DeltaA)
 end subroutine cov_mtx
 
-! Compute the inverse of a matrix
+! Compute the inverse of a symmetric matrix A of order "n"
 subroutine mtx_inv(n, A, A_inv)
 	integer, intent(in)   :: n
 	real(DP), intent(in)  :: A(n,n)
@@ -131,10 +131,10 @@ subroutine mtx_inv(n, A, A_inv)
 	! Stop the program if necessary
 	if (info /= 0) call fatal_error('Singular matrix in subroutine MTX_INV()')
 	
-	! Free memory from Work
+	! Free memory from the WORK array
 	deallocate(work)
 	
-	! Resizing WORK array
+	! Resizing the WORK array
 	allocate(work(n))
 	
 	! LAPACK subroutine to get "A^(-1)" for a symmetric matrix "A"
@@ -149,6 +149,9 @@ subroutine mtx_inv(n, A, A_inv)
 			A_inv(i,j) = A_inv(j,i)
 		end do
 	end do
+
+  	! Free memory from the WORK array
+   	deallocate(work)
 end subroutine mtx_inv
 
 end program ilc
