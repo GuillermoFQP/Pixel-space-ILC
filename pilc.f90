@@ -106,7 +106,7 @@ subroutine cov_mtx(nvar, nobs, A, C)
 	deallocate(DeltaA)
 end subroutine cov_mtx
 
-! Solve the real system of "n" symmetric linear equations in "n" unknowns in the form "A*X=B"
+! Compute the inverse of a matrix
 subroutine mtx_inv(n, A, A_inv)
 	integer, intent(in)   :: n
 	real(DP), intent(in)  :: A(n,n)
