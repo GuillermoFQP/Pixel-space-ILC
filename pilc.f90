@@ -46,7 +46,7 @@ end do
 
 write(*,'(/,X,A)') "Computing ILC weights"
 
-! Provide storage for covariance matrix, inverse covariance inverse and weight vector
+! Provide storage for covariance matrix, inverse covariance matrix and weight vector
 allocate(cov(nfreqmaps,nfreqmaps), cov_inv(nfreqmaps,nfreqmaps), w(nfreqmaps))
 
 ! Compute covariance matrix
